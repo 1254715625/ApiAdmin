@@ -1,0 +1,95 @@
+<extend name="Public/base" />
+<block name="main">
+    <fieldset class="layui-elem-field">
+        <legend>短信发送</legend>
+        <form class="layui-form"  method="post" id="my_form">
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否群发</label>
+                <div class="layui-input-block" >
+                    <input type="radio"  name="sex" value="0" title="否"checked>
+                    <input type="radio"  name="sex" value="1" title="是" >
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">模板ID</label>
+                <div class="layui-input-block">
+                    <input type="text" name="temp" required  lay-verify="required" value="3049566" placeholder="请输入模板ID" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item" >
+                <label class="layui-form-label">收件人</label>
+                <div class="layui-input-block">
+                    <input type="text" name="mobile" required  lay-verify="required" value="" placeholder="请填写收件人手机号" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">正文</label>
+                <div class="layui-input-block">
+                    <textarea name="arr" placeholder="请输入参数 中间用，号 隔开"  class="layui-textarea"></textarea>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+
+
+        </form>
+
+    </fieldset>
+</block>
+<block name="myScript">
+    <script>
+    $(function(){
+            layui.use('form', function(){
+                var layer = layui.layer;
+
+                var form = layui.form();
+
+                $('#my_form').submit(function(){
+
+                    var sex=    $(" input[name='sex']").val();
+                    var temp=   $(" input[name='temp']").val();
+                    var mobile= $(" input[name='mobile']").val();
+                    var arr=    $(" textarea[name='arr']").val();
+
+                    //console.log( $(" input[name='sex']:eq(1)").val());
+
+                    $.post('Admin/Message/sendTemplate',{"sex":sex,"temp":temp,"mobile":mobile,"arr":arr},function(date){
+                        console.log(date);
+
+                        if(date.code ==200){
+
+                            alert('发送成功');
+
+                            var index = parent.layer.getFrameIndex(window.name);
+
+                            parent.layer.close(index);
+
+                        }else {
+
+                            alert('发送失败,可是短信资源不够');
+
+                            var index = parent.layer.getFrameIndex(window.name);
+
+                            parent.layer.close(index);
+
+                        }
+
+                    },'json')
+
+                });
+
+            });
+
+    })
+    </script>
+</block>

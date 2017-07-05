@@ -1,0 +1,137 @@
+<extend name="Public/base" />
+<block name="main">
+    <script type="text/javascript" src="__PUBLIC__/dataTable/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/dataTable.css">
+    <fieldset class="layui-elem-field">
+        <legend>数据结构导出</legend>
+        <div class="layui-field-box">
+            <form class="layui-form" id="set_message_my_form" action="">
+                <div class="layui-form-item">
+                    <!--<div class="layui-inline">
+                        <select name="type" >
+                            &lt;!&ndash;<option value="">请选择查询方式</option>&ndash;&gt;
+                            &lt;!&ndash;<option value="1" >查询单个表</option>&ndash;&gt;
+                            <option value="2" >查询库</option>
+                        </select>
+                    </div>-->
+                    <div class="layui-inline">
+                        <div class="layui-input-inline" style="width: 300px;">
+                            <input type="text" name="keyword" placeholder="请输入关键词" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <span class="layui-btn sub">查询</span>
+                    </div>
+                </div>
+            </form>
+            <table class="layui-table" id="list-admin" lay-even>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>数据库</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </fieldset>
+</block>
+<block name="myScript">
+    <script>
+        /**
+         * 格式化时间戳
+         * @param fmt
+         * @returns {*}
+         * @constructor
+         */
+        /*Date.prototype.Format = function (fmt) {
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        };*/
+
+        layui.use(['layer', 'form'], function() {
+            $(document).on('click', '.confirm', function () {
+                var ownObj = $(this);
+                layer.confirm(ownObj.attr('data-info'), {
+                    btn: ['确定','取消'] //按钮
+                }, function(){
+                    $.ajax({
+                        type: "POST",
+                        url: ownObj.attr('data-url'),
+                        data: {id:ownObj.attr('data-id')},
+                        success: function(msg){
+                            if( msg.code == 1 ){
+                                location.reload();
+                            }else{
+
+                            }
+                        }
+                    });
+                });
+            });
+
+            $(document).on('click', '.edit', function () {
+                var ownObj = $(this);
+                var database_name=ownObj.parent().parent().find('td:eq(1)').text();
+                console.log(database_name)
+                window.location.href="/Admin/Excel/remove?keyword="+database_name;
+            });
+
+            var myFun = function (query) {
+                query = query || '';
+                return $('#list-admin').DataTable({
+
+                    ajax: {
+                        url:'/Admin/Excel/get_tables' + query,
+                        type: 'GET',
+                        dataSrc: function ( json ) {
+                            if( json.code == 0 ){
+                                parent.layer.msg(json.msg, {
+                                    icon: 5,
+                                    shade: [0.6, '#393D49'],
+                                    time:1500
+                                });
+                            }else{
+                                return json.data;
+                            }
+                        }
+                    },
+                    columnDefs:[
+                        {
+                            "targets":2,
+                            "render":function(data, type, row){
+                                var returnStr = '';
+                                returnStr += '<span style="text-align: center" class="layui-btn edit layui-btn-normal" ' +
+                                        'data-id="' + row.id +'" data-url="{:U(\'showDetail\')}">导出该数据库表结构</span>';
+                                return returnStr;
+                            }
+                        }
+                    ],
+                    iDisplayLength : 10,
+                    aLengthMenu : [5, 10, 20],
+                    columns: [
+                        {"data": "id"},
+                        {"data": "Database"},
+
+                    ]
+                });
+            };
+            var myTable = myFun();
+            $('.sub').on("click", function(){
+                myTable.destroy();
+                myTable = myFun('?'+ $('#set_message_my_form').serialize());
+            });
+        });
+    </script>
+</block>

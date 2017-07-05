@@ -1,0 +1,69 @@
+<html>
+<head>
+
+
+    <link href="/Public/css/demo.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/Public/css/jqbar.css" />
+
+</head>
+<body>
+    <h1>
+        <span style="color: red">统计详情:</span>{$date['title']}
+    </h1>
+
+
+        <div class="nine columns">
+            <div class="bars MT30">
+
+                <!--<?php for($i=13;$i<=22;$i++) { ?>
+                    <div id="bar-{$i}"></div>
+                <?php }  ?>-->
+                <?php if($date['question1'] !=''){ ?>  <div id="bar-13"></div> <?php } ?>
+                <?php if($date['question2'] !=''){ ?>  <div id="bar-14"></div> <?php } ?>
+                <?php if($date['question3'] !=''){ ?>  <div id="bar-15"></div> <?php } ?>
+                <?php if($date['question4'] !=''){ ?>  <div id="bar-16"></div> <?php } ?>
+                <?php if($date['question5'] !=''){ ?>  <div id="bar-17"></div> <?php } ?>
+                <?php if($date['question6'] !=''){ ?>  <div id="bar-18"></div> <?php } ?>
+                <?php if($date['question7'] !=''){ ?>  <div id="bar-19"></div> <?php } ?>
+                <?php if($date['question8'] !=''){ ?>  <div id="bar-20"></div> <?php } ?>
+                <?php if($date['question9'] !=''){ ?>  <div id="bar-21"></div> <?php } ?>
+                <?php if($date['question10'] !=''){ ?>  <div id="bar-22"></div> <?php } ?>
+
+
+
+            </div>
+        </div>
+
+
+<script src="/Public/js/jquery.min.js" type="text/javascript"></script>
+<script src="/Public/js/jqbar.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        $('#bar-13').jqbar({ label: "<span>{$date['question1'][1]}</span><span style='color: red'>{$date['question1'][2]}人</span>", barColor: '#D64747', value: "{$date['question1'][0]}", orientation: 'v' });
+
+        $('#bar-14').jqbar({ label:"<span>{$date['question2'][1]}</span><span style='color: red'>{$date['question2'][2]}人</span>", barColor: '#FF681F', value: "{$date['question2'][0]}", orientation: 'v' });
+
+        $('#bar-15').jqbar({ label: "<span>{$date['question3'][1]}</span><span style='color: red'>{$date['question3'][2]}人</span>", barColor: '#ea805c', value: "{$date['question3'][0]}", orientation: 'v' });
+
+        $('#bar-16').jqbar({ label: "<span>{$date['question4'][1]}</span><span style='color: red'>{$date['question4'][2]}人</span>", barColor: '#88bbc8', value: "{$date['question4'][0]}", orientation: 'v' });
+
+        $('#bar-17').jqbar({ label: "<span>{$date['question5'][1]}</span><span style='color: red'>{$date['question5'][2]}人</span>", barColor: '#939393', value: "{$date['question5'][0]}", orientation: 'v' });
+
+        $('#bar-18').jqbar({ label: "<span>{$date['question6'][1]}</span><span style='color: red'>{$date['question6'][2]}人</span>", barColor: '#3a89c9', value: "{$date['question6'][0]}", orientation: 'v' });
+
+        $('#bar-19').jqbar({ label: "<span>{$date['question7'][1]}</span><span style='color: red'>{$date['question7'][2]}人</span>", barColor: '#c0c0c0', value: "{$date['question7'][0]}",orientation: 'v' });
+
+        $('#bar-20').jqbar({ label: "<span>{$date['question8'][1]}</span><span style='color: red'>{$date['question8'][2]}人</span>", barColor: '#2856a4', value: "{$date['question8'][0]}", orientation: 'v' });
+
+        $('#bar-21').jqbar({ label: "<span>{$date['question9'][1]}</span><span style='color: red'>{$date['question9'][2]}人</span>", barColor: '#35a8c6', value: "{$date['question9'][0]}", orientation: 'v' });
+
+        $('#bar-22').jqbar({ label: "<span>{$date['question10'][1]}</span><span style='color: red'>{$date['question10'][2]}人</span>",barColor: '#54a4s6', value: "{$date['question10'][0]}", orientation: 'v' });
+
+    });
+</script>
+
+</body>
+</html>

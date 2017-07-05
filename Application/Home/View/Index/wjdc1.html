@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+
+
+    <title>问卷调查</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .bg {
+            background: #eeeff1 repeat center top;
+            width: 100%;
+            height: 2000px;
+            margin: 0 auto;
+        }
+
+        .bg1 {
+            background-color: #fff;
+            width: 1000px;
+            height: 2000px;
+            margin: 0 auto;
+        }
+
+        /*标题*/
+        .reldiv {
+            padding: 20px 40px;
+        }
+
+        .reldiv h1.h3 {
+            font-size: 28px;
+            color: hsl(0, 0%, 16%);
+        }
+
+        .alignc {
+            text-align: center;
+
+            /*内容*/
+        }
+
+        .wjhr {
+            background: hsl(0, 0%, 80%);
+            height: 2px;
+            width: 100%;
+        }
+
+        .mtop {
+            margin-top: 24px;
+        }
+
+        .wjques {
+            margin-bottom: 10px;
+        }
+
+        .wjques .title {
+            font-size: 18px;
+            color: hsl(0, 0%, 16%);
+            margin-left: -10px;
+            padding-bottom: 3px;
+        }
+
+        .wjques .title table {
+        }
+
+        .button {
+            background: #F00;
+            color: #fff;
+            margin: 0 auto;
+            text-align: center;
+            height: 38px;
+            width: 120px;
+            line-height: 38px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="bg">
+    <div class="bg1">
+
+
+        <!--标题-->
+        <div class="reldiv">
+            <h1 class="alignc h3">彩尊用户问券调查</h1>
+            <div class="mtop2 lookdiv">
+        <span class="fL">为了更好的服务用户，本次问卷调查共计13题，有单选和多选，选项并无对错之分，只需根
+        据实际情况选择即可。</span>
+            </div>
+
+
+            <!--内容-->
+            <div class="wjhr mtop"></div>
+            <div class="ques mtop">
+                <div class="wjques">
+
+                    <form name="input" id="form" action="submit" method="post">
+
+                        <volist name="arr" id="ar" key="k">
+
+                            <div class="title">{$k}、{$ar['title']}</div>
+
+                            <!--单选框-->
+                            <?php if($ar['status'] == 0 ){ ?>
+
+
+                            <?php if($ar['question1'] != '' ){ ?>
+                            <input date="{$ar.id}" date_status="{$ar.status}" type="radio" name="sex{$ar.id}"
+                                   value="{$ar.id}|--|{$ar['head1']}" checked="checked"><!--checked="checked"-->
+                            {$ar['question1']}
+                            <br/>
+                            <?php  }else echo '' ; ?>
+
+                            <?php if($ar['question2'] != '' ){ ?>
+                            <input date="{$ar.id}" date_status="{$ar.status}" type="radio" name="sex{$ar.id}"
+                                   value="{$ar.id}|--|{$ar['head2']}">
+                            {$ar['question2']}
+                            <br/>
+                            <?php  }else echo '' ; ?>
+
+                            <?php if($ar['question3'] != '' ){ ?>
+                            <input date="{$ar.id}" date_status="{$ar.status}" type="radio" name="sex{$ar.id}"
+                                   value="{$ar.id}|--|{$ar['head3']}">
+                            {$ar['question3']}
+                            <br/>
+                            <?php  }else echo '' ; ?>
+
+                            <?php if($ar['question4'] != '' ){ ?>
+                            <input date="{$ar.id}" date_status="{$ar.status}" type="radio" name="sex{$ar.id}"
+                                   value="{$ar.id}|--|{$ar['head4']}">
+                            {$ar['question4']}
+                            <br/>
+                            <?php  }else echo '' ; ?>
+
+                            <?php if($ar['question5'] != '' ){ ?>
+                            <input date="{$ar.id}" date_status="{$ar.status}" type="radio" name="sex{$ar.id}"
+                                   value="{$ar.id}|--|{$ar['head5']}">
+                            {$ar['question5']}
+                            <br/>
+                            <?php  }else echo '' ; ?>
+
+                            <?php if($ar['question6'] != '' ){ ?>
+                            <input date="{$ar.id}" date_status="{$ar.status}" type="radio" name="sex{$ar.id}"
+                                   value="{$ar.id}|--|{$ar['head6']}">
+                            {$ar['question6']}
+                            <br/>
+                            <?php  }else echo '' ; ?>
+
+                            <?php if($ar['question7'] != '' ){ ?>
+                            <input date="{$ar.id}" date_status="{$ar.status}" type="radio" name="sex{$ar.id}"
+                                   value="{$ar.id}|--|{$ar['head7']}">
+                            {$ar['question7']}
+                            <br/>
+                            <?php  }else echo '' ; ?>
+
+                            <?php if($ar['question8'] != '' ){ ?>
+                            <input date="{$ar.id}" date_status="{$ar.status}" type="radio" name="sex{$ar.id}"
+                                   value="{$ar.id}|--|{$ar['head8']}">
+                            {$ar['question8']}
+                            <br/>
+                            <?php  }else echo '' ; ?>
+
+                            <?php if($ar['question9'] != '' ){ ?>
+                            <input date="{$ar.id}" date_status="{$ar.status}" type="radio" name="sex{$ar.id}"
+                                   value="{$ar.id}|--|{$ar['head9']}">
+                            {$ar['question9']}
+                            <br/>
+
+                            <?php  }else echo '' ; ?>
+                            <?php if($ar['question10'] != '' ){ ?>
+                            <input date="{$ar.id}" date_status="{$ar.status}" type="radio" name="sex{$ar.id}"
+                                   value="{$ar.id}|--|{$ar['head10']}">
+                            {$ar['question10']}
+                            <br/>
+                            <?php  }else echo '' ; ?>
+
+
+                            <?php }
+                 else { ?>
+                            <!--复选框-->
+
+
+                            <div class="wjques">
+
+                                <!-- <div class="title"><span style="color:#F00;">(可多选)</span></div>-->
+                                <?php if($ar['question1'] != ''  ){ ?>
+                                <label class="icr-label checked"> <span class="icr-item type_checkbox"></span>   <span
+                                        class="icr-hidden"><input date="{$ar.id}" date_status="{$ar.status}"
+                                                                  class="icr-input " type="checkbox"
+                                                                  name="checkbox{$ar.id}[]"
+                                                                  value="{$ar.id}|--|{$ar['head1']}" checked="">
+                                    <!--checked=""-->
+                                             </span> <span class="icr-text"> {$ar['question1']}</span>
+                                </label>
+                                <?php  }else echo '' ; ?>
+
+                                <?php if($ar['question2'] != ''  ){ ?>
+                                <label class="icr-label checked"> <span class="icr-item type_checkbox"></span>   <span
+                                        class="icr-hidden"><input date="{$ar.id}" class="icr-input "
+                                                                  date_status="{$ar.status}" type="checkbox"
+                                                                  name="checkbox{$ar.id}[]"
+                                                                  value="{$ar.id}|--|{$ar['head2']}">
+                                             </span> <span class="icr-text"> {$ar['question2']}</span>
+                                </label>
+                                <?php  }else echo '' ; ?>
+
+                                <?php if($ar['question3'] != ''  ){ ?>
+                                <label class="icr-label checked"> <span class="icr-item type_checkbox"></span>   <span
+                                        class="icr-hidden"><input date="{$ar.id}" class="icr-input "
+                                                                  date_status="{$ar.status}" type="checkbox"
+                                                                  name="checkbox{$ar.id}[]"
+                                                                  value="{$ar.id}|--|{$ar['head3']}">
+                                             </span> <span class="icr-text"> {$ar['question3']}</span>
+                                </label>
+                                <?php  }else echo '' ; ?>
+
+                                <?php if($ar['question4'] != ''  ){ ?>
+                                <label class="icr-label checked"> <span class="icr-item type_checkbox"></span>   <span
+                                        class="icr-hidden"><input date="{$ar.id}" class="icr-input "
+                                                                  date_status="{$ar.status}" type="checkbox"
+                                                                  name="checkbox{$ar.id}[]"
+                                                                  value="{$ar.id}|--|{$ar['head4']}">
+                                             </span> <span class="icr-text"> {$ar['question4']}</span>
+                                </label>
+                                <?php  }else echo '' ; ?>
+
+                                <?php if($ar['question5'] != ''  ){ ?>
+                                <label class="icr-label checked"> <span class="icr-item type_checkbox"></span>   <span
+                                        class="icr-hidden"><input date="{$ar.id}" class="icr-input "
+                                                                  date_status="{$ar.status}" type="checkbox"
+                                                                  name="checkbox{$ar.id}[]"
+                                                                  value="{$ar.id}|--|{$ar['head5']}">
+                                             </span> <span class="icr-text"> {$ar['question5']}</span>
+                                </label>
+                                <?php  }else echo '' ; ?>
+
+                                <?php if($ar['question6'] != ''  ){ ?>
+                                <label class="icr-label checked"> <span class="icr-item type_checkbox"></span>   <span
+                                        class="icr-hidden"><input date="{$ar.id}" class="icr-input "
+                                                                  date_status="{$ar.status}" type="checkbox"
+                                                                  name="checkbox{$ar.id}[]"
+                                                                  value="{$ar.id}|--|{$ar['head6']}">
+                                             </span> <span class="icr-text"> {$ar['question6']}</span>
+                                </label>
+                                <?php  }else echo '' ; ?>
+
+                                <?php if($ar['question7'] != ''  ){ ?>
+                                <label class="icr-label checked"> <span class="icr-item type_checkbox"></span>   <span
+                                        class="icr-hidden"><input date="{$ar.id}" class="icr-input "
+                                                                  date_status="{$ar.status}" type="checkbox"
+                                                                  name="checkbox{$ar.id}[]"
+                                                                  value="{$ar.id}|--|{$ar['head7']}">
+                                             </span> <span class="icr-text"> {$ar['question7']}</span>
+                                </label>
+                                <?php  }else echo '' ; ?>
+
+                                <?php if($ar['question8'] != ''  ){ ?>
+                                <label class="icr-label checked"> <span class="icr-item type_checkbox"></span>   <span
+                                        class="icr-hidden"><input date="{$ar.id}" class="icr-input "
+                                                                  date_status="{$ar.status}" type="checkbox"
+                                                                  name="checkbox{$ar.id}[]"
+                                                                  value="{$ar.id}|--|{$ar['head8']}">
+                                             </span> <span class="icr-text"> {$ar['question8']}</span>
+                                </label>
+                                <?php  }else echo '' ; ?>
+
+                                <?php if($ar['question9'] != ''  ){ ?>
+                                <label class="icr-label checked"> <span class="icr-item type_checkbox"></span>   <span
+                                        class="icr-hidden"><input date="{$ar.id}" class="icr-input "
+                                                                  date_status="{$ar.status}" type="checkbox"
+                                                                  name="checkbox{$ar.id}[]"
+                                                                  value="{$ar.id}|--|{$ar['head9']}">
+                                             </span> <span class="icr-text"> {$ar['question9']}</span>
+                                </label>
+                                <?php  }else echo '' ; ?>
+
+                                <?php if($ar['question10'] != ''  ){ ?>
+                                <label class="icr-label checked"> <span class="icr-item type_checkbox"></span>   <span
+                                        class="icr-hidden"><input date="{$ar.id}" class="icr-input "
+                                                                  date_status="{$ar.status}" type="checkbox"
+                                                                  name="checkbox{$ar.id}[]"
+                                                                  value="{$ar.id}|--|{$ar['head10']}">
+                                             </span> <span class="icr-text"> {$ar['question10']}</span>
+                                </label>
+                                <?php  }else echo '' ; ?>
+
+
+                            </div>
+
+
+                            <?php } ?>
+
+
+                        </volist>
+
+                        <div class="wjques">
+                            <div class="title">最后您希望彩尊线上娱乐在产品上需改善哪些？</div>
+                            <table>
+                                <td><textarea name="desc" style=" width:918px; height:80px;"
+                                              placeholder="请输入内容"></textarea></td>
+                            </table>
+                        </div>
+                        <a href="#">
+                            <div class="button" id="send">发送</div>
+                        </a>
+                    </form>
+                </div>
+
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    $(function () {
+
+        $('input').on('click', function () {
+            var name = $(this).attr('name');
+            var status = $(this).attr('date_status');
+            var answers_id = $(this).attr('date');
+            var record_id = $(this).val();
+
+            /*$.ajax({
+             type: "POST",
+             url: '/Home/Index/ajax',
+             dataType:'json',
+             data: {"answers_id":answers_id,"record_id":record_id,"status":status},
+             success: function(date){
+             // console.log(date)
+             if( date == 1 ){
+             //location.reload();
+             }else{
+             // alert('页面错误')
+             }
+             }
+             });*/
+        })
+
+        $('#send').on('click', function () {
+            $('#form').submit();
+        })
+    })
+</script>
+</html>

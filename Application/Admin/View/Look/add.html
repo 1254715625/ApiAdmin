@@ -1,0 +1,158 @@
+<extend name="Public/base" />
+<block name="main">
+    <fieldset class="layui-elem-field">
+        <legend>调查管理 - {:(isset($detail['id'])?'编辑':'新增')}调查</legend>
+        <div class="layui-field-box">
+            <form class="layui-form" action="">
+                <if condition="isset($detail['id'])">
+                    <input type="hidden" name="id" value="{$detail['id']}">
+                </if>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">类型(默认单选框)</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="status" value="0" title="单选框" checked>
+                        <input type="radio" name="status" value="1" title="复选框" >
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span style="color:red">*</span>问题的名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" required value="{:(isset($detail['title'])?$detail['title']:'')}" lay-verify="required" placeholder="请输入问题的名称" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回答A</label>
+                    <div class="layui-input-block">
+                        <textarea name="question1" placeholder="" class="layui-textarea"> <?php if(isset($detail['question1'])) echo explode('|--|',$detail['question1'])[1] ;else{ echo  '' ;} ?></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回答B</label>
+                    <div class="layui-input-block">
+                        <textarea name="question2" placeholder="" class="layui-textarea"><?php if(isset($detail['question2'])) echo explode('|--|',$detail['question2'])[1] ;else{ echo  '' ;} ?></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回答C</label>
+                    <div class="layui-input-block">
+                        <textarea name="question3" placeholder="" class="layui-textarea"><?php if(isset($detail['question3'])) echo explode('|--|',$detail['question3'])[1] ;else{ echo  '' ;} ?></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回答D</label>
+                    <div class="layui-input-block">
+                        <textarea name="question4" placeholder="" class="layui-textarea"><?php if(isset($detail['question4'])) echo explode('|--|',$detail['question4'])[1] ;else{ echo  '' ;} ?></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回答E</label>
+                    <div class="layui-input-block">
+                        <textarea name="question5" placeholder="没有可不填" class="layui-textarea"><?php if(isset($detail['question5'])) echo explode('|--|',$detail['question5'])[1] ;else{ echo  '' ;} ?></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回答F</label>
+                    <div class="layui-input-block">
+                        <textarea name="question6" placeholder="没有可不填" class="layui-textarea"><?php if(isset($detail['question6'])) echo explode('|--|',$detail['question6'])[1] ;else{ echo  '' ;} ?></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回答G</label>
+                    <div class="layui-input-block">
+                        <textarea name="question7" placeholder="没有可不填" class="layui-textarea"><?php if(isset($detail['question7'])) echo explode('|--|',$detail['question7'])[1] ;else{ echo  '' ;} ?></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回答H</label>
+                    <div class="layui-input-block">
+                        <textarea name="question8" placeholder="没有可不填" class="layui-textarea"><?php if(isset($detail['question8'])) echo explode('|--|',$detail['question8'])[1] ;else{ echo  '' ;} ?></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回答I</label>
+                    <div class="layui-input-block">
+                        <textarea name="question9" placeholder="没有可不填" class="layui-textarea"><?php if(isset($detail['question9'])) echo explode('|--|',$detail['question9'])[1] ;else{ echo  '' ;} ?></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">回答J</label>
+                    <div class="layui-input-block">
+                        <textarea name="question10" placeholder="没有可不填" class="layui-textarea"><?php if(isset($detail['question10'])) echo explode('|--|',$detail['question10'])[1] ;else{ echo  '' ;} ?></textarea>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="admin-form">立即提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </fieldset>
+</block>
+<block name="myScript">
+    <if condition="isset($detail['id'])">
+        <script>
+            layui.use('form', function(){
+                var form = layui.form();
+                form.on('submit(admin-form)', function(data){
+                    $.ajax({
+                        type: "POST",
+                        url: '{:U("edit")}',
+                        data: data.field,
+                        success: function(msg){
+                            if( msg.code == 1 ){
+                                parent.location.reload();
+                            }else{
+                                parent.layer.msg(msg.msg, {
+                                    icon: 5,
+                                    shade: [0.6, '#393D49'],
+                                    time:1500
+                                });
+                            }
+                        }
+                    });
+                    return false;
+                });
+
+            });
+        </script>
+        <else />
+        <script>
+            layui.use('form', function(){
+                var form = layui.form();
+                form.on('submit(admin-form)', function(data){
+                    $.ajax({
+                        type: "POST",
+                        url: '{:U("add")}',
+                        data: data.field,
+                        success: function(msg){
+                            if( msg.code == 1 ){
+                                parent.location.reload();
+                            }else{
+                                parent.layer.msg(msg.msg, {
+                                    icon: 5,
+                                    shade: [0.6, '#393D49'],
+                                    time:1500
+                                });
+                            }
+                        }
+                    });
+                    return false;
+                });
+
+            });
+        </script>
+    </if>
+</block>

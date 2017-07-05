@@ -1,0 +1,114 @@
+<extend name="Public/base" />
+<block name="main">
+    <script type="text/javascript" src="__PUBLIC__/dataTable/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/dataTable.css">
+    <fieldset class="layui-elem-field">
+        <legend>采集网站</legend>
+        <div class="layui-field-box">
+            <form class="layui-form" id="set_message_my_form" action="/Admin/Collect/type">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <select name="type" lay-filter="search" id="my_select">
+                            <option value="1" >58同城</option>
+                           <!-- <option value="2" >赶集网</option>
+                            <option value="3" >智联招聘</option>-->
+                            <option value="4" >中华英才</option>
+                          <!--  <option value="5" >新安</option>-->
+                            <option value="6" >顺企网</option>
+                            <option value="7" >114黄页</option>
+                        </select>
+                    </div>
+                    <div class="layui-inline">
+                        <div class="layui-input-inline" style="width: 300px;">
+                            <input type="text" name="keyword" placeholder="请输入关键词" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn layui-btn-warm" lay-submit lay-filter="formDemo" >查询并生成表格</button>
+                        <span class="layui-btn layui-btn-normal click">关键词解释说明</span>
+                    </div>
+                </div>
+
+            </form>
+
+            <table class="layui-table" id="list-admin" lay-even>
+                <thead>
+                <tr>
+                   <!-- <th>ID</th>-->
+                    <th>姓名</th>
+                    <th>电话</th>
+                    <th>公司</th>
+                    <th>金额</th>
+                    <th>地址</th>
+                    <th>操作</th>
+                </tr>
+                <volist name="res" id="re" key="k">
+                    <tr>
+                       <!-- <td>{$k}</td>-->
+                        <td>{$re.linkman}</td>
+                        <td><?php echo substr($re['tel'],15); ?></td>
+                        <td><?php echo  substr($re['cid'],0,36); ?></td>
+                        <td><?php echo explode('（万元）',$re['money'])[0]; ?></td>
+                        <td><?php echo mb_substr($re['address'],0,12).'...'; ?></td>
+                        <td>
+                            <a  date="{$res.id}" >修改</a>
+                            <a  class="confirm" data-info="你确认删除么?" date="{$re.id}">删除</a>
+                        </td>
+                    </tr>
+                </volist>
+                </thead>
+            </table>
+            <div style="text-align: center">
+                {$page->show()}
+            </div>
+
+        </div>
+    </fieldset>
+</block>
+<block name="myScript">
+    <script>
+        layui.use(['layer', 'form'], function() {
+            var form =layui.form();
+
+            $('.confirm').on('click',function(){
+                var obj=$(this);
+                var id=obj.attr('date');
+                if(id ==''){
+                    alert('ID不能为空');
+                    return ;
+                }
+                layer.confirm(obj.attr('data-info'),{
+                    btn:['确认','取消']
+                },function(){
+
+                    $.post('/Admin/CollectCURD/del',{'table':'api_client',"id":id},function(date){
+                        layer.msg(date.msg);
+                        location.reload();
+
+                    },'json');
+
+                })
+            });
+
+            $('.click').on('click',function(){
+               layer.open({
+                   title:'关键字解释说明',
+                   content:'关键字指的是你要搜索的添加，比如想搜索在58上搜索合肥，就填合肥.<br> ' +
+                   '另注 顺企网的比较特殊需要到他们官网<br>http://b2b.11467.com' +
+                   '去搜索一下，把搜索返回的结果填入到我们的搜索框中，如合肥的是-540880a5.填入即可'
+               })
+            });
+
+            //发送邮件
+            $('.send').on('click', function () {
+                layer.open({
+                    type: 2,
+                    area: ['85%', '85%'],
+                    maxmin: true,
+                    content: '{:U("add")}'
+                });
+            });
+
+        })
+    </script>
+</block>

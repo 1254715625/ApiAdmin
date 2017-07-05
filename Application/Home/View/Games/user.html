@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>个人中心</title>
+<link rel="stylesheet" href="/Public/style/weui.min.css"/>
+<link rel="stylesheet" href="/Public/css/example.css"/>
+<link rel="stylesheet" href="/Public/css/swiper.min.css">
+<link rel="stylesheet" href="/Public/css/style.css"/>
+
+</head>
+<body ontouchstart>
+
+
+<div class="container" id="container">
+    <div class="page js_show">
+    	<div class="page_cont mycenter-index-cont">
+            <div class="container_mid"> 
+                <a href="#" class="top-who mt10 pub_list border_b">
+                    <div class="who-pic"><img src="img/idx_ad2.png"></div>
+                    <div class="pub_list_bd">
+                        <p class="the-name mb5">{$_SESSION['mobile']}</p>
+                        <p class="black9"><i class="ico-phone mr5"></i>135****8638</p>    
+                    </div>
+                </a>
+                <div class="xinxi-box mb10">
+                    <ul>
+                        <!--<li class="xinxi-li border_r">
+                            <a href="#">
+                                <p class="mb5 the-num num-color1">100.5</p>
+                                <p class="black9">余额(元)</p>
+                            </a>
+                        </li>
+                        <li class="xinxi-li border_r">
+                            <a href="#">
+                                <p class="mb5 the-num fontcl1">4</p>
+                                <p class="black9">红包(个)</p>
+                            </a>
+                        </li>-->
+                        <!--<li class="xinxi-li">
+                            <a href="#">
+                                <p class="mb5 the-num num-color2">123</p>
+                                <p class="black9">积分(分)</p>
+                            </a>
+                        </li>-->
+                        <div class="clear"></div>
+                    </ul>                        
+                </div>
+                <!--  <div class="link-one">
+                      <a href="#" class="pub_list link-a border_b">
+                          <div class="pub_list_bd">收货地址</div>
+                      </a>
+                  </div>
+                  <div class="link-one">
+                      <a href="#" class="pub_list link-a border_b">
+                          <div class="pub_list_bd">我的收藏</div>
+                      </a>
+                  </div>
+                  <div class="link-one mb10">
+                      <a href="#" class="pub_list link-a">
+                          <div class="pub_list_bd">我的圈子</div>
+                      </a>
+                  </div>
+                  <div class="link-one">
+                      <a href="#" class="pub_list link-a border_b">
+                          <div class="pub_list_bd">积分商城</div>
+                      </a>
+                  </div>  -->
+                <div class="link-one">
+                    <a href="#" class="pub_list link-a border_b">                            
+                        <div class="pub_list_bd">充值</div>
+                    </a>  
+                </div>
+                <div class="link-one mb10">
+                    <a href="#" class="pub_list link-a">                            
+                        <div class="pub_list_bd">邀请qq好友</div>
+                    </a>  
+                </div>   
+                <div class="link-one">
+                    <a href="#" class="pub_list link-a border_b">                            
+                        <div class="pub_list_bd">充值,分享规则查看</div>
+                    </a>  
+                </div>
+                <!--<div class="link-one">
+                    <a href="#" class="pub_list link-a">                            
+                        <div class="pub_list_bd">申请合作</div>
+                    </a>  
+                </div>-->
+                <div class="text_c mt10 mb10">
+                        <a href="/Home/Games/login_out" class="tuichu-btn fontcl1 login_out">退出登录</a>
+                    </div>
+            </div>
+            <!--底部导航-->
+<!--            <div class="footer_nav">
+            	<a href="#" class="list">
+                	<i class="ico ico1"></i>
+                    <P>首页</P>
+                </a>
+                <a href="#" class="list">
+                	<i class="ico ico2"></i>
+                    <P>分类</P>
+                </a>
+
+
+            </div>-->
+            <!--底部导航end-->
+
+            <style>
+                
+                #fix_footer_menu img, #fix_footer_menu_on img {
+                    width: 24px;
+                    height: 25px;
+                }
+            </style>
+
+            <div class="fix_footer" id="fix_footer"
+                 style="left:0;background-color:#191919;color:#ffffff;height:55px;width:100%;position:fixed;bottom:0%;font-size:14px;">
+                <table width="100%" height="100%" border="0" style="border-collapse: collapse;">
+                    <tbody>
+                    <tr>
+                        <td id="fix_footer_menu" onClick="window.location='/'" align="center"><img
+                                src="/Public/index/images/nav_7.png"><br>玩游戏
+                        </td>
+                        <td id="fix_footer_menu_on" onClick="window.location='/Public/ceshi/'"
+                            align="center"><img src="/Public/index/images/nav_5.png"><br>测试
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<a href="javascript:;" class="goto_top"></a>
+<script src="js/zepto.min.js"></script>
+<script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="js/weui.min.js"></script>
+<script src="js/example.js"></script>
+<script src="js/swiper.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+var swiper = new Swiper('.swiper-container', {
+    pagination: '.swiper-pagination',
+    slidesPerView: 1,
+    paginationClickable: true,
+    spaceBetween: 0,
+    loop: true
+});
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(e) {
+    
+        function yiyuan_time(id) {
+            var t = Math.floor($("#" + id).attr('rel'));
+            t--;
+            var d = Math.floor(t / 60 / 60 / 24);
+            var h = Math.floor(t / 60 / 60 % 24);
+            var m = Math.floor(t / 60 % 60);
+            var s = Math.floor(t % 60);
+            $("#" + id).attr('rel', t);
+            $("#" + id).html(m + '分' + s + '秒');
+        }
+        setInterval(function () {
+            for(i=1;i<100;i++){
+                yiyuan_time("daojishi" + i);
+            }
+        }, 1000);//倒计时js部分结束
+
+    });
+        
+</script> 
+
+</body>
+</html>

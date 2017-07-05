@@ -1,0 +1,94 @@
+<extend name="Public/base" />
+<block name="main">
+    <fieldset class="layui-elem-field">
+        <legend>短信配置</legend>
+        <form class="layui-form"  method="post" >
+
+
+           <!-- <div class="layui-form-item">
+                <label class="layui-form-label">信息分类</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="mid" value="0" title="网易云信"checked>
+                    <input type="radio" name="mid" value="1" title="阿里云信息" >
+                </div>
+            </div>-->
+
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">AppKey</label>
+                <div class="layui-input-block">
+                    <input type="text" name="AppKey" required  lay-verify="required" value="3049566" placeholder="请输入AppKey" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item" >
+                <label class="layui-form-label">AppSecret</label>
+                <div class="layui-input-block">
+                    <input type="text" name="AppSecret" required  lay-verify="required" value="" placeholder="请填写AppSecret" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn lay-submit" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+
+
+        </form>
+
+    </fieldset>
+</block>
+<block name="myScript">
+    <script>
+        $(function(){
+            layui.use('form', function(){
+                var layer = layui.layer;
+
+                var form = layui.form();
+
+                $('.lay-submit').click(function(){
+
+                    var AppKey=    $(" input[name='AppKey']").val();
+                    var AppSecret=   $(" input[name='AppSecret']").val();
+                 //   var name=   $(" input[name='mid']").val();
+
+                    //console.log( $(" input[name='sex']:eq(1)").val());
+
+                    $.post('Admin/Message/set_message_add',{"AppKey":AppKey,"AppSecret":AppSecret},function(date){
+                        console.log(date);
+
+                        if(date.code ==200){
+
+                            alert('配置成功');
+
+                            parent.location.reload();
+
+                            var index = parent.layer.getFrameIndex(window.name);
+
+                            parent.layer.close(index);
+
+                        }else {
+
+                            alert('配置失败');
+
+                            parent.location.reload();
+
+                            var index = parent.layer.getFrameIndex(window.name);
+
+                            parent.layer.close(index);
+
+                        }
+
+                    },'json')
+
+                });
+
+
+
+            });
+
+        })
+    </script>
+</block>

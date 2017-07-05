@@ -1,0 +1,9 @@
+{
+    "require": {
+        "houdunwang/cart": "^1.0",
+        "zoujingli/wechat-php-sdk": "^1.3"
+    },
+    "config": {
+        "secure-http": true
+    }
+}

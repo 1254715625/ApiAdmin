@@ -1,0 +1,7 @@
+[push]
+	default = simple
+[user]
+	email = 1263115223@qq.com
+	name  = 1254715625
+[credential]
+	helper = store

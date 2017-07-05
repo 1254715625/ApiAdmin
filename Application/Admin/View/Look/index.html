@@ -1,0 +1,112 @@
+<extend name="Public/base" />
+<block name="main">
+    <fieldset class="layui-elem-field">
+        <legend>调查- 统计列表</legend>
+        <div class="layui-field-box">
+            <span class="layui-btn layui-btn-warm api-add"><i class="layui-icon">&#xe608;</i> 新增</span>
+           <!-- <span class="layui-btn layui-btn-warm suggest"><i class="layui-icon"></i> 查看建议</span>-->
+            <table class="layui-table" lay-even>
+                <thead>
+                <tr>
+                    <th >#</th>
+                    <th>id</th>
+                    <th>标题</th>
+                    <th>问题</th>
+                    <th>问题</th>
+                    <th>类型</th>
+                    <!--<volist name="list" id="vo" key="k">
+                        <th>{$vo.}</th>
+                    </volist>-->
+                    <th style="text-align: center">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <volist name="list" id="vo" key="k">
+                    <tr>
+                        <td>{$k}</td>
+                        <td>{$vo['id']}</td>
+                        <td>{$vo['title']}</td>
+                        <td> <?php  echo explode('|--|',$vo['question1'])[1]; ?></td>
+                        <td><?php  echo explode('|--|',$vo['question2'])[1]; ?></td>
+                        <td>{$vo['status'] == 0 ?'单选':'多选'}</td>
+                        <td style="text-align: center">
+                            <span data-url="{:U('total', array('id' => $vo['id']))}" class="layui-btn total">统计</span>
+                            <span data-url="{:U('detail', array('id' => $vo['id']))}" class="layui-btn edit">详情</span>
+                            <span data-url="{:U('edit', array('id' => $vo['id']))}" class="layui-btn edit layui-btn-normal">编辑</span>
+                            <span class="layui-btn layui-btn-danger confirm" data-id="{$vo['id']}" data-info="你确定删除当前对象么？" data-url="{:U('del')}">删除</span>
+                        </td>
+                    </tr>
+                </volist>
+                </tbody>
+            </table>
+            {$page}
+        </div>
+    </fieldset>
+</block>
+<block name="myScript">
+    <script>
+        layui.use(['layer'], function() {
+            $('.api-add').on('click', function () {
+                layer.open({
+                    type: 2,
+                    area: ['95%', '95%'],
+                    maxmin: true,
+                    content: '{:U("add")}'
+                });
+            });
+
+            $('.suggest').on('click', function () {
+                layer.open({
+                    type: 2,
+                    area: ['95%', '95%'],
+                    maxmin: true,
+                    content: '{:U("suggest")}'
+                });
+            });
+
+
+            $('.total').on('click', function () {
+                var ownObj = $(this);
+                layer.open({
+                    type: 2,
+                    area: ['90%', '90%'],
+                    maxmin: true,
+                    content: ownObj.attr('data-url')
+                });
+            });
+
+            $('.edit').on('click', function () {
+                var ownObj = $(this);
+                layer.open({
+                    type: 2,
+                    area: ['95%', '95%'],
+                    maxmin: true,
+                    content: ownObj.attr('data-url')
+                });
+            });
+            $('.confirm').on('click', function () {
+                var ownObj = $(this);
+                layer.confirm(ownObj.attr('data-info'), {
+                    btn: ['确定','取消'] //按钮
+                }, function(){
+                    $.ajax({
+                        type: "POST",
+                        url: ownObj.attr('data-url'),
+                        data: {id:ownObj.attr('data-id')},
+                        success: function(msg){
+                            if( msg.code == 1 ){
+                                location.reload();
+                            }else{
+                                layer.msg(msg.msg, {
+                                    icon: 5,
+                                    shade: [0.6, '#393D49'],
+                                    time:1500
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</block>

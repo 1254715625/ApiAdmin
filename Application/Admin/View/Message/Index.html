@@ -1,0 +1,61 @@
+<extend name="Public/base" />
+<block name="main">
+    <script type="text/javascript" src="__PUBLIC__/dataTable/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/dataTable.css">
+    <fieldset class="layui-elem-field">
+        <legend>管理信息</legend>
+        <div class="layui-field-box">
+            <form class="layui-form" id="set_message_my_form" action="">
+                <div class="layui-form-item">
+                    <!--<div class="layui-inline">
+                        <select name="type" >
+                            &lt;!&ndash;<option value="">请选择查询方式</option>&ndash;&gt;
+                            &lt;!&ndash;<option value="1" >查询单个表</option>&ndash;&gt;
+                            <option value="2" >查询库</option>
+                        </select>
+                    </div>-->
+                    <div class="layui-inline">
+                        <div class="layui-input-inline" style="width: 300px;">
+                            <input type="text" name="keyword" placeholder="请输入关键词" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <span class="layui-btn sub">查询</span>
+                        <span class="layui-btn layui-btn-warm send">发送短信</span>
+                    </div>
+                </div>
+            </form>
+            <table class="layui-table" id="list-admin" lay-even>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>用户名</th>
+                    <th>操作</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </fieldset>
+</block>
+<block name="myScript">
+    <script>
+        layui.use(['layer', 'form'], function() {
+
+            //发送邮件
+            $('.send').on('click', function () {
+                layer.open({
+                    type: 2,
+                    area: ['85%', '85%'],
+                    maxmin: true,
+                    content: '{:U("add")}'
+                });
+            });
+
+        })
+    </script>
+</block>

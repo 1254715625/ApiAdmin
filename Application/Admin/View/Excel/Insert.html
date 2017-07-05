@@ -1,0 +1,32 @@
+<extend name="Public/base" />
+<block name="main">
+    <fieldset class="layui-elem-field">
+        <legend>导入表格数据</legend>
+    </fieldset><br/>
+    <!--<form action="/Admin/excel/Insert" method="post" enctype="multipart/form-data">-->
+        <input type="file" name="file" class="layui-upload-file"> <!--layui-upload-file-->
+       <!-- <input type="submit">-->
+   <!-- </form>-->
+</block>
+<block name="myScript">
+        <script>
+            layui.use('upload', function(){
+
+                layui.upload({
+                    url: '/Admin/excel/insert',
+                    'type':'file',
+                    success: function(res){
+                        console.log(res); //上传成功返回值，必须为json格式
+                        if(res.status == 1){
+                            layer.msg('插入成功');
+                        }else{
+                            layer.msg(res.msg);
+                        }
+                    }
+                });
+
+
+            });
+        </script>
+
+</block>

@@ -1,0 +1,90 @@
+<extend name="Public/base" />
+<block name="main">
+    <script type="text/javascript" src="__PUBLIC__/dataTable/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/dataTable.css">
+    <fieldset class="layui-elem-field">
+        <legend>信息配置</legend>
+        <div class="layui-field-box">
+            <form class="layui-form" id="set_message_my_form" action="">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <span class="layui-btn layui-btn-normal send_message">添加配置</span>
+                    </div>
+                </div>
+            </form>
+            <table class="layui-table" id="list-admin" lay-even>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>名字</th>
+                        <th>AppKey</th>
+                        <th>AppSecret</th>
+                        <th>操作</th>
+                    </tr>
+
+                <volist name="results" id="res">
+                    <tr>
+                       <td>{$res.id}</td>
+                       <td>{$res.title}</td>
+                       <td>{$res.AppKey}</td>
+                       <td>{$res.AppSecret}</td>
+                       <td>
+                           <a  class="edit  layui-btn layui-btn-normal  layui-btn-small"  date="{$res.id}" >修改</a>
+                           <a  class="del layui-btn layui-btn-danger layui-btn-small confirm" info="确认删除么?" date="{$res.id}">删除</a>
+                       </td>
+                    </tr>
+                </volist>
+
+                </thead>
+            </table>
+        </div>
+    </fieldset>
+</block>
+<block name="myScript">
+    <script>
+        layui.use(['layer', 'form'], function() {
+
+            //删除配置
+            $('.confirm').on('click',function(){
+
+                var obj = $(this);
+
+                var id = obj.attr('date');
+
+                layer.confirm(obj.attr('info'),{
+                    btn:['确定','取消'] //按钮
+                },function(){
+                    $.post('/Admin/Message/del',{"id":id},function(date){
+                        console.log(date);
+                        if(date.code ==1){
+
+                            alert('success');
+
+                            location.reload();
+
+                        }else {
+
+                            alert('false');
+
+                            location.reload();
+
+                        }
+                    },'json');
+                });
+
+            });
+
+
+            //发送邮件
+            $('.send_message').on('click', function () {
+                layer.open({
+                    type: 2,
+                    area: ['60%', '60%'],
+                    maxmin: true,
+                    content: '{:U("set_message_add")}'
+                });
+            });
+
+        })
+    </script>
+</block>
